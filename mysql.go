@@ -16,7 +16,7 @@ var dbs = make(map[string]*gorm.DB)
 type LogWriter struct{}
 
 func (w LogWriter) Printf(format string, args ...any) {
-	logger.Errorf(format, args...)
+	logger.Warnf(format, args...)
 }
 
 // GetDb 获取数据库连接
@@ -35,7 +35,7 @@ func GetDb(name string) (*gorm.DB, error) {
 
 	//判断配置数据库类型
 	if conf.Type != "mysql" {
-		return nil, errors.New("Database config '" + name + "' type is not sqlserver.")
+		return nil, errors.New("Database config '" + name + "' type is not mysql.")
 	}
 
 	dsnParam := ""

@@ -3,7 +3,7 @@ module github.com/go-gourd/mysql
 go 1.20
 
 require (
-	github.com/go-gourd/gourd v0.2.7
+	github.com/go-gourd/gourd v0.2.9
 	gorm.io/driver/mysql v1.4.7
 	gorm.io/gorm v1.24.6
 )
