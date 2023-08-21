@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/go-gourd/gourd/config"
-	"github.com/go-gourd/gourd/logger"
+	"github.com/go-gourd/gourd/log"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	gormLogger "gorm.io/gorm/logger"
@@ -16,7 +16,7 @@ var dbs = make(map[string]*gorm.DB)
 type LogWriter struct{}
 
 func (w LogWriter) Printf(format string, args ...any) {
-	logger.Warnf(format, args...)
+	log.Warnf(format, args...)
 }
 
 // GetDb 获取数据库连接
@@ -66,7 +66,7 @@ func GetDb(name string) (*gorm.DB, error) {
 		Logger: newLogger,
 	})
 	if err != nil {
-		logger.Error("cannot establish db connection: %w" + err.Error())
+		log.Error("cannot establish db connection: %w" + err.Error())
 		return nil, err
 	}
 
