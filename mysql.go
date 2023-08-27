@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-var dbs = make(map[string]*gorm.DB)
+var pool = make(map[string]*gorm.DB)
 
 type LogWriter struct{}
 
@@ -22,8 +22,8 @@ func (w LogWriter) Printf(format string, args ...any) {
 // GetDb 获取数据库连接
 func GetDb(name string) (*gorm.DB, error) {
 
-	if _, ok := dbs[name]; ok {
-		return dbs[name], nil
+	if _, ok := pool[name]; ok {
+		return pool[name], nil
 	}
 
 	dbConf := config.GetDbConfig()
@@ -70,7 +70,7 @@ func GetDb(name string) (*gorm.DB, error) {
 		return nil, err
 	}
 
-	dbs[name] = newDb
+	pool[name] = newDb
 
 	return newDb, nil
 }
